@@ -17,6 +17,7 @@ import models.*;
 
 public class HomeController extends Controller {
 
+
     public Result index(String name) {
         return ok(index.render("Welcome to the Home page", name));
     }
@@ -30,8 +31,15 @@ public class HomeController extends Controller {
         // Get list of all categories in ascending order
         List<Product> productsList = Product.findAll();
         return ok(products.render(productsList));
+
     }
 
+     //Render and return the add new product page
+
+    public  Result addProduct () {
+
+        return  ok(addProduct.render());
+    }
 }
 
 
