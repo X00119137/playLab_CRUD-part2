@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.*;
 import play.api.Environment;
 import play.mvc.*;
 import play.data.*;
@@ -17,6 +18,15 @@ import models.*;
 
 public class HomeController extends Controller {
 
+       //declare a private formfactory instance
+
+    private FormFactory formFactory;
+
+    //
+    @Inject
+    public HomeController(FormFactory f) {
+        this.formFactory = f;
+    }
 
     public Result index(String name) {
         return ok(index.render("Welcome to the Home page", name));
@@ -38,7 +48,31 @@ public class HomeController extends Controller {
 
     public  Result addProduct () {
 
-        return  ok(addProduct.render());
+
+        Form<Product> addProductForm = formFactory.form(Product.class);
+
+        return  ok(addProduct.render(addProductForm));
+    }
+
+    public Result addProductSubmit() {
+
+        Form<Product> newProductForm = formFactory.form(Product.class).bindFromRequest();
+
+        if(newProductForm.hasErrors()) {
+            return badRequest(addProduct.render(newProductForm));
+        }
+
+
+        Product newProduct = newProductForm.get();
+
+        newProduct.save();
+
+        flash("succes", "product" +newProduct.getName()+"has been created");
+
+
+        return redirect(controllers.routes.HomeController.products());
+
+
     }
 }
 
