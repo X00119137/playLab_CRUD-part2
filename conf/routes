@@ -12,6 +12,10 @@ GET     /products                   controllers.HomeController.products
 
 GET     /addProduct                 controllers.HomeController.addProduct
 
+GET     /addProductSubmit            controllers.HomeController.addProductSubmit
+
+GET     /delProduct/:id               controllers.HomeController.deleteProduct(id:Long)
+
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
