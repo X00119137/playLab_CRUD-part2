@@ -75,7 +75,7 @@ public class HomeController extends Controller {
     }
            public Result deleteProduct(Long id) {
 
-               product.find.ref(id).delete();
+               Product.find.ref(id).delete();
 
                flash("success","product has been deleted");
 
@@ -87,6 +87,6 @@ public class HomeController extends Controller {
 
 
 
-}
+
 
 
